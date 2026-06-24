@@ -55,10 +55,10 @@ llm_model = os.getenv("LLM_MODEL", f"ollama/{settings.OLLAMA_MODEL}")
 print(f"\n🚀 [LLM Setup] CrewAI agents will use model: {llm_model}")
 if llm_model.startswith("ollama/"):
     print(f"🔗 [LLM Setup] Connecting to local Ollama at: {settings.OLLAMA_BASE_URL}\n")
-    llm = LLM(model=llm_model, base_url=settings.OLLAMA_BASE_URL, temperature=0.2)
+    llm = LLM(model=llm_model, base_url=settings.OLLAMA_BASE_URL, temperature=0.2, max_retries=5)
 else:
     print(f"☁️ [LLM Setup] Connecting to cloud provider via LiteLLM\n")
-    llm = LLM(model=llm_model, temperature=0.2)
+    llm = LLM(model=llm_model, temperature=0.2, max_retries=5)
 
 class CopilotAgents:
     def resume_analyst_agent(self):
