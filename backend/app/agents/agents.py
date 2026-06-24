@@ -52,11 +52,12 @@ search_tool = CustomSearchTool()
 
 # Initialize LLM (supports local Ollama or cloud providers like OpenAI, Gemini, etc.)
 llm_model = os.getenv("LLM_MODEL", f"ollama/{settings.OLLAMA_MODEL}")
+print(f"\n🚀 [LLM Setup] CrewAI agents will use model: {llm_model}")
 if llm_model.startswith("ollama/"):
+    print(f"🔗 [LLM Setup] Connecting to local Ollama at: {settings.OLLAMA_BASE_URL}\n")
     llm = LLM(model=llm_model, base_url=settings.OLLAMA_BASE_URL, temperature=0.2)
 else:
-    # Cloud models (e.g. "openai/gpt-4o" or "gemini/gemini-1.5-flash") will automatically use 
-    # their respective API keys (e.g., OPENAI_API_KEY, GEMINI_API_KEY) from the environment.
+    print(f"☁️ [LLM Setup] Connecting to cloud provider via LiteLLM\n")
     llm = LLM(model=llm_model, temperature=0.2)
 
 class CopilotAgents:

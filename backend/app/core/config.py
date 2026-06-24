@@ -13,9 +13,15 @@ class Settings(BaseSettings):
     # Ollama Local LLM
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     OLLAMA_MODEL: str = os.getenv("OLLAMA_MODEL", "mistral")
+    
+    # Cloud LLM Configuration
+    LLM_MODEL: str | None = None
+    OPENROUTER_API_KEY: str | None = None
+    GEMINI_API_KEY: str | None = None
 
     class Config:
         case_sensitive = True
         env_file = ".env"
+        extra = "ignore"
 
 settings = Settings()
