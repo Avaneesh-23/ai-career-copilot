@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-text font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary text-black;
+  }
+}
+
+/* ─── Layout ─── */
+.app-layout {
+  @apply min-h-screen bg-background text-text flex;
+  background-image: radial-gradient(circle at 50% 0%, #111 0%, #000 70%);
+}
+
+.app-main {
+  @apply flex-1 overflow-y-auto p-6 md:p-10;
+  min-height: 100vh;
+}
+
+/* ─── Brutalist Components ─── */
+@layer components {
+  .brutalist-card {
+    @apply bg-surface border-2 border-[#222] shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)] rounded-none hover:border-[#444] transition-colors duration-200;
+  }
+  
+  .terminal-block {
+    @apply bg-black border border-[#333] font-mono text-sm p-4 text-secondary rounded-none;
+  }
+
+  .brutalist-button {
+    @apply bg-primary text-black font-bold uppercase tracking-wider px-6 py-3 border-2 border-primary hover:bg-black hover:text-primary transition-colors duration-200 inline-block text-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .brutalist-button-outline {
+    @apply bg-transparent text-white font-bold uppercase tracking-wider px-6 py-3 border-2 border-[#333] hover:border-white transition-colors duration-200 inline-block text-center cursor-pointer;
+  }
+}
+
+/* ─── Sidebar ─── */
+.sidebar {
+  @apply w-64 bg-black border-r-2 border-[#222] flex flex-col shrink-0 sticky top-0 h-screen;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-collapsed {
+  @apply w-[72px];
+}
+
+.sidebar-brand {
+  @apply flex items-center gap-3 px-5 py-6 border-b-2 border-[#222] uppercase tracking-widest font-bold text-white;
+}
+
+.sidebar-link {
+  @apply flex items-center gap-3 px-4 py-4 text-textMuted text-sm font-bold uppercase tracking-wide border-b border-[#111] transition-all duration-200;
+}
+
+.sidebar-link:hover {
+  @apply bg-[#111] text-white pl-6;
+}
+
+.sidebar-link-active {
+  @apply bg-primary text-black border-l-4 border-l-black;
+}
+.sidebar-link-active:hover {
+  @apply text-black pl-4;
+}
+
+/* ─── Auth Pages ─── */
+.auth-page {
+  @apply min-h-screen flex items-center justify-center relative overflow-hidden;
+  background-color: #000;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.auth-card {
+  @apply relative z-10 w-full max-w-md bg-black border-2 border-[#333] p-8 shadow-[8px_8px_0px_0px_rgba(226,249,83,1)];
+}
+
+.auth-input {
+  @apply w-full bg-surface border-2 border-[#333] p-3.5 text-white font-mono placeholder-[#555]
+    focus:outline-none focus:border-primary transition-colors rounded-none;
+}
+
+/* ─── Score Ring ─── */
+.score-ring {
+  transform: rotate(-90deg);
+}
+
+.score-ring-progress {
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Animations ─── */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Loading Spinner ─── */
+.loading-spinner {
+  @apply w-10 h-10 border-4 border-[#333] border-t-primary rounded-none;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-spinner-sm {
+  @apply w-5 h-5 border-2 border-[#555] border-t-primary rounded-none;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+  border-left: 1px solid #222;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-[#333] border-l border-[#222];
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary;
+}
